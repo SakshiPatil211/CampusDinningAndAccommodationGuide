@@ -1,0 +1,37 @@
+<?php
+session_start();
+
+include("../db.php");
+
+$a=$_POST["Uid"];
+$b=$_POST["Rid"];
+$c=$_POST["Rating"];
+
+
+
+$mess="";
+$mess.=nullvalid($c,"Select Rating");
+
+
+		//++++++++Not Empty+++++++++++++++
+	function nullvalid($names,$nametital)
+	{
+		if($names=="")
+		{
+         return $nametital.",";
+		}	
+	}
+
+
+if($mess=="")
+{
+$conn->query("Delete from rating where Rid='$b' and Uid='$a'");
+
+$conn->query("insert into rating(Rid,Uid,Rateval) values('$b','$a','$c')");
+echo "Rating post successfully";
+}
+else
+{
+echo $mess;
+}
+?>
